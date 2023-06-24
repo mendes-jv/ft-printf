@@ -1,16 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/22 13:47:20 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/06/22 13:47:54 by jovicto2         ###   ########.fr       */
+/*   Created: 2023/06/23 21:46:30 by jovicto2          #+#    #+#             */
+/*   Updated: 2023/06/23 21:53:41 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_printf(const char *, ...)
-{
-	return (0);
-}
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include <unistd.h>
+# include <stdlib.h>
+# include <stdarg.h>
+
+# ifndef PRINTF_ERROR
+# define PRINTF_ERROR -1
+# endif
+
+# ifndef STDOUT_FD
+# define STDOUT_FD 1
+# endif
+
+// Mandatory
+int	ft_printf(const char *format, ...);
+
+#endif
