@@ -6,7 +6,7 @@
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:54:09 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/05/25 15:30:47 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/06/24 04:10:09 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-//mandatory
-
+//Libft
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
@@ -53,8 +52,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
-//bonus
-
 typedef struct s_list
 {
 	void			*content;
@@ -71,8 +68,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-//extras
-
+//Get Next Line
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 100000
 # endif
@@ -82,5 +78,14 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 # endif
 
 char	*ft_get_next_line(int fd);
+
+//Prinft
+# ifndef NULL_STRING
+#  define NULL_STRING "(NULL)"
+# endif
+
+size_t	ft_lputaddress_fd(unsigned long nbr, int fd);
+size_t	ft_lputhexa_fd(long nbr, int fd, char specifier);
+size_t	ft_lputstr_fd(char *s, int fd);
 
 #endif
