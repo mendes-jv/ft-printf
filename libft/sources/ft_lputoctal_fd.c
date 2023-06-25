@@ -12,13 +12,15 @@
 
 #include "libft.h"
 
-size_t	ft_lputoctal_fd(unsigned long nbr, int fd, char specifier)
+size_t	ft_lputoctal_fd(unsigned long nbr, int fd)
 {
 	size_t	written_bytes;
+	char	converter;
 
 	written_bytes = 0;
 	if (nbr / 8 > 0)
-		written_bytes += ft_lputhexa_fd(nbr / 8, fd);
-	written_bytes += write(fd, nbr % 8 + '0', sizeof(char));
+		written_bytes += ft_lputoctal_fd(nbr / 8, fd);
+	converter = nbr % 8 + '0';
+	written_bytes += write(fd, &converter, sizeof(char));
 	return (written_bytes);
 }

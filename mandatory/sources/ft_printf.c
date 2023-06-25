@@ -10,10 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../libft/includes/libft.h"
 #include "../includes/ft_printf.h"
 
 static size_t	ft_apply_specifier(char specifier, va_list ap);
+static size_t	ft_write_specifiers(char specifier, va_list ap);
 
 int	ft_printf(const char *format, ...)
 {
@@ -58,10 +58,19 @@ static size_t	ft_apply_specifier(char specifier, va_list ap)
 	else if (specifier == 'f')
 		pb += ft_lputdouble_fd(va_arg(ap, double), STDOUT_FD);
 	else
-	{
-		if (!ft_strchr("c%", specifier))
-			pb += write(STDOUT_FD, "%", sizeof(char));
-		pb += write(STDOUT_FD, &specifier, sizeof(char));
-	}
+		ft_write_specifiers(specifier, ap);
+	return (pb);
+}
+
+static size_t	ft_write_specifiers(char specifier, va_list ap)
+{
+	size_t	pb;
+
+	pb = 0;
+	if (specifier == 'c')
+		specifier = va_arg(ap, int);
+	if (specifier != '%')
+		pb += write(STDOUT_FD, "%", sizeof(char));
+	pb += write(STDOUT_FD, &specifier, sizeof(char));
 	return (pb);
 }

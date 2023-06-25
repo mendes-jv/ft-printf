@@ -12,9 +12,10 @@
 
 #include "libft.h"
 
-size_t	ft_lputdouble_fd(double nbr, int fd, char specifier)
+size_t	ft_lputdouble_fd(double nbr, int fd)
 {
 	size_t	written_bytes;
+	char	converter;
 
 	written_bytes = 0;
 	if (nbr < 0)
@@ -28,7 +29,8 @@ size_t	ft_lputdouble_fd(double nbr, int fd, char specifier)
 	while (((int)(nbr * 10)) / 10 > 0)
 	{
 		nbr *= 10.0;
-		written_bytes += write(fd, (int)nbr % 10 + '0', sizeof(char));
+		converter = ((int)nbr) % 10 + '0';
+		written_bytes += write(fd, &converter, sizeof(char));
 		nbr -= (int)nbr;
 	}
 	return (written_bytes);

@@ -19,17 +19,17 @@ size_t	ft_lputhexa_fd(unsigned long nbr, int fd, char specifier)
 
 	written_bytes = 0;
 	if (nbr / 16 > 0)
-		written_bytes += ft_lputhexa_fd(nbr / 16, fd);
+		written_bytes += ft_lputhexa_fd(nbr / 16, fd, specifier);
 	if (nbr / 16 > 9)
 	{
 		nbr -= 10;
 		if (specifier == 'X')
-			converter = 'A';
+			converter = nbr % 16 + 'A';
 		else
-			converter = 'a';
+			converter = nbr % 16 + 'a';
 	}
 	else
-		converter = '0';
-	written_bytes += write(fd, nbr % 16 + converter, sizeof(char));
+		converter = nbr % 16 + '0';
+	written_bytes += write(fd, &converter, sizeof(char));
 	return (written_bytes);
 }

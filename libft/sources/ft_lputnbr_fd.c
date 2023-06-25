@@ -15,15 +15,17 @@
 size_t	ft_lputnbr_fd(long nbr, int fd)
 {
 	size_t	written_bytes;
+	char	converter;
 
 	written_bytes = 0;
 	if (nbr < 0)
 	{
 		nbr = -nbr;
-		written_bytes += write(fd, '-', sizeof(char));
+		written_bytes += write(fd, "-", sizeof(char));
 	}
 	if (nbr / 10 > 0)
 		written_bytes += ft_lputnbr_fd(nbr / 10, fd);
-	written_bytes += write(fd, nbr % 10 + '0', sizeof(char));
+	converter = nbr % 10 + '0';
+	written_bytes += write(fd, &converter, sizeof(char));
 	return (written_bytes);
 }

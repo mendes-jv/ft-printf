@@ -14,10 +14,10 @@
 
 size_t	ft_lputstr_fd(char *s, int fd)
 {
-	size_t written_bytes;
-	
+	size_t	written_bytes;
+
 	written_bytes = 0;
 	while (*s)
 		written_bytes += write(fd, s++, sizeof(char));
-	return(written_bytes);
+	return (written_bytes);
 }

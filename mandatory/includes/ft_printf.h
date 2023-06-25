@@ -13,16 +13,17 @@
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <unistd.h>
-# include <stdlib.h>
+# include "../../libft/includes/libft.h"
 # include <stdarg.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 # ifndef PRINTF_ERROR
-# define PRINTF_ERROR -1
+#  define PRINTF_ERROR -1
 # endif
 
 # ifndef STDOUT_FD
-# define STDOUT_FD 1
+#  define STDOUT_FD 1
 # endif
 
 // Mandatory
