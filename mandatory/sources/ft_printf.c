@@ -44,15 +44,19 @@ static size_t	ft_apply_specifier(char specifier, va_list ap)
 	if (specifier == 's')
 		pb += ft_lputstr_fd(va_arg(ap, char *), STDOUT_FD);
 	else if (specifier == 'p')
-		pb += ft_lputaddress_fd(va_arg(ap, unsigned long), STDOUT_FD);
+		pb += ft_lputaddress_fd(va_arg(ap, size_t), STDOUT_FD);
 	else if (specifier == 'o')
-		pb += ft_lputoctal_fd(va_arg(ap, unsigned long), STDOUT_FD);
+		pb += ft_lputoctal_fd(va_arg(ap, size_t), STDOUT_FD);
 	else if (specifier == 'b')
-		pb += ft_lputbinary_fd(va_arg(ap, unsigned long), STDOUT_FD);
-	else if (ft_strchr("diu", specifier))
+		pb += ft_lputbin_fd(va_arg(ap, size_t), STDOUT_FD);
+	else if (ft_strchr("di", specifier))
 		pb += ft_lputnbr_fd(va_arg(ap, int), STDOUT_FD);
+	else if (specifier == 'u')
+		pb += ft_lputnbr_fd(va_arg(ap, unsigned int), STDOUT_FD);
 	else if (ft_strchr("xX", specifier))
-		pb += ft_lputhexa_fd(va_arg(ap, unsigned int), STDOUT_FD, specifier);
+		pb += ft_lputhexa_fd(va_arg(ap, size_t), STDOUT_FD, specifier);
+	else if (specifier == 'f')
+		pb += ft_lputdouble_fd(va_arg(ap, double), STDOUT_FD);
 	else
 	{
 		if (!ft_strchr("c%", specifier))
