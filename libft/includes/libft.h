@@ -6,7 +6,7 @@
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:54:09 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/06/24 04:10:09 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/06/24 19:31:22 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,11 @@ char	*ft_get_next_line(int fd);
 # endif
 
 size_t	ft_lputaddress_fd(unsigned long nbr, int fd);
-size_t	ft_lputhexa_fd(long nbr, int fd, char specifier);
+size_t	ft_lputbin_fd(unsigned long nbr, int fd);
+size_t	ft_lputdouble_fd(double nbr, int fd);
+size_t	ft_lputhexa_fd(unsigned long nbr, int fd, char specifier);
+size_t	ft_lputnbr_fd(long nbr, int fd);
+size_t	ft_lputoctal_fd(unsigned long nbr, int fd);
 size_t	ft_lputstr_fd(char *s, int fd);
 
 #endif
