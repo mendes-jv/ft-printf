@@ -54,7 +54,7 @@ static size_t	ft_apply_specifier(char specifier, va_list ap)
 	else if (specifier == 'u')
 		pb += ft_lputnbr_fd(va_arg(ap, unsigned int), STDOUT_FD);
 	else if (ft_strchr("xX", specifier))
-		pb += ft_lputhexa_fd(va_arg(ap, size_t), STDOUT_FD, specifier);
+		pb += ft_lputhexa_fd(va_arg(ap, unsigned int), STDOUT_FD, specifier);
 	else if (specifier == 'f')
 		pb += ft_lputdouble_fd(va_arg(ap, double), STDOUT_FD);
 	else

@@ -12,7 +12,7 @@
 
 #include "../../libft/includes/libft.h"
 
-size_t	ft_lputhexa_fd(unsigned long long nbr, int fd, char specifier)
+size_t	ft_lputhexa_fd(size_t nbr, int fd, char specifier)
 {
 	size_t	written_bytes;
 	char	converter;
@@ -20,9 +20,8 @@ size_t	ft_lputhexa_fd(unsigned long long nbr, int fd, char specifier)
 	written_bytes = 0;
 	if (nbr / 16 > 0)
 		written_bytes += ft_lputhexa_fd(nbr / 16, fd, specifier);
-	nbr %= 16;
-	converter = nbr;
-	if (nbr > 9)
+	converter = nbr % 16;
+	if (converter > 9)
 	{
 		converter -= 10;
 		if (specifier == 'X')

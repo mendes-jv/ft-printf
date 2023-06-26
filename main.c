@@ -12,15 +12,17 @@
 
 #include "mandatory/includes/ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	main(void)
 {
 	int	ft;
 	int	stdio;
 
-	ft = ft_printf("%p", NULL);
-	printf("\n");
-	stdio = printf("%p", NULL);
+	ft_printf("ft_printf: ");
+	ft = ft_printf("%p", LONG_MAX);
+	printf("\nprintf: ");
+	stdio = printf("%p", LONG_MAX);
 	printf("\n");
 	if (ft == stdio)
 		printf("\nSame return values.");
