@@ -27,7 +27,7 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
-			pb += ft_apply_specifier(*(format + 1), ap);
+			pb += ft_apply_specifier(*(++format), ap);
 		else
 			pb += write(STDOUT_FD, &(*format), sizeof(char));
 		format++;
@@ -58,7 +58,7 @@ static size_t	ft_apply_specifier(char specifier, va_list ap)
 	else if (specifier == 'f')
 		pb += ft_lputdouble_fd(va_arg(ap, double), STDOUT_FD);
 	else
-		ft_write_specifiers(specifier, ap);
+		pb += ft_write_specifiers(specifier, ap);
 	return (pb);
 }
 
@@ -69,7 +69,7 @@ static size_t	ft_write_specifiers(char specifier, va_list ap)
 	pb = 0;
 	if (specifier == 'c')
 		specifier = va_arg(ap, int);
-	if (specifier != '%')
+	else if (specifier != '%')
 		pb += write(STDOUT_FD, "%", sizeof(char));
 	pb += write(STDOUT_FD, &specifier, sizeof(char));
 	return (pb);

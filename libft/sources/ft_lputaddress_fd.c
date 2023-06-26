@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-size_t	ft_lputaddress_fd(unsigned long nbr, int fd)
+size_t	ft_lputaddress_fd(size_t nbr, int fd)
 {
 	size_t	written_bytes;
 
 	written_bytes = 0;
 	if (!nbr)
 	{
-		written_bytes += ft_lputstr_fd(NULL_STRING, fd);
+		written_bytes += ft_lputstr_fd(NULL_POINTER, fd);
 		return (written_bytes);
 	}
 	written_bytes += ft_lputstr_fd("0x", fd);

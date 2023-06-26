@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lputbin_fd.c                                    :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/24 19:22:41 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/06/24 19:22:41 by jovicto2         ###   ########.fr       */
+/*   Created: 2023/06/25 17:35:24 by jovicto2          #+#    #+#             */
+/*   Updated: 2023/06/25 17:36:52 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "mandatory/includes/ft_printf.h"
+#include <stdio.h>
 
-size_t	ft_lputbin_fd(size_t nbr, int fd)
+int	main(void)
 {
-	size_t	written_bytes;
-	char	converter;
+	int	ft;
+	int	stdio;
 
-	written_bytes = 0;
-	if (nbr / 2 > 0)
-		written_bytes += ft_lputbin_fd(nbr / 2, fd);
-	converter = nbr % 2 + '0';
-	written_bytes += write(fd, &converter, sizeof(char));
-	return (written_bytes);
+	ft = ft_printf("%p", NULL);
+	printf("\n");
+	stdio = printf("%p", NULL);
+	printf("\n");
+	if (ft == stdio)
+		printf("\nSame return values.");
+	else
+	{
+		printf("\ndifference in return values.\n");
+		printf("returned: %d\nexpected: %d\n", ft, stdio);
+	}
+	return (0);
 }

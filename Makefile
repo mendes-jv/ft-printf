@@ -12,7 +12,7 @@
 
 NAME = libftprintf.a
 
-MANDATORY_HEADER = mandatory/includes/ft_printf.h
+MANDATORY_HEADER = mandatory/includes/
 
 PATH_MANDATORY_SRC = mandatory/sources/
 
@@ -22,7 +22,9 @@ MANDATORY_SRC = $(addprefix $(PATH_MANDATORY_SRC), ft_printf.c)
 
 LIBFT = libft/libft.a
 
-MAKE_LIBFT = make -C libft 
+LIBFT_HEADER = libft/includes/
+
+MAKE_LIBFT = make -C libft
 
 AR = ar -rcs
 
@@ -34,9 +36,10 @@ all: $(NAME)
 
 $(PATH_MANDATORY_OBJ)%.o: $(PATH_MANDATORY_SRC)%.c
 	mkdir -p $(PATH_MANDATORY_OBJ)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(MANDATORY_HEADER) $(LIBFT) 
+	$(CC) $(FLAGS) -c $< -o $@ -I $(MANDATORY_HEADER)
 
 $(NAME): $(LIBFT) $(MANDATORY_OBJS)
+	cp $(LIBFT) $(NAME)
 	$(AR) $(NAME) $(MANDATORY_OBJS)
 
 $(LIBFT):

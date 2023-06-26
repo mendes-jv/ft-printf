@@ -17,6 +17,8 @@ size_t	ft_lputstr_fd(char *s, int fd)
 	size_t	written_bytes;
 
 	written_bytes = 0;
+	if (!s)
+		return (write(fd, NULL_STRING, ft_strlen(NULL_STRING)));
 	while (*s)
 		written_bytes += write(fd, s++, sizeof(char));
 	return (written_bytes);

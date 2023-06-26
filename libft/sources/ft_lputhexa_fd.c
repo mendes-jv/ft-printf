@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../libft/includes/libft.h"
 
-size_t	ft_lputhexa_fd(unsigned long nbr, int fd, char specifier)
+size_t	ft_lputhexa_fd(unsigned long long nbr, int fd, char specifier)
 {
 	size_t	written_bytes;
 	char	converter;
@@ -20,16 +20,18 @@ size_t	ft_lputhexa_fd(unsigned long nbr, int fd, char specifier)
 	written_bytes = 0;
 	if (nbr / 16 > 0)
 		written_bytes += ft_lputhexa_fd(nbr / 16, fd, specifier);
-	if (nbr / 16 > 9)
+	nbr %= 16;
+	converter = nbr;
+	if (nbr > 9)
 	{
-		nbr -= 10;
+		converter -= 10;
 		if (specifier == 'X')
-			converter = nbr % 16 + 'A';
+			converter += 'A';
 		else
-			converter = nbr % 16 + 'a';
+			converter += 'a';
 	}
 	else
-		converter = nbr % 16 + '0';
+		converter += '0';
 	written_bytes += write(fd, &converter, sizeof(char));
 	return (written_bytes);
 }

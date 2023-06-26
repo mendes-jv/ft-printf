@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-size_t	ft_lputoctal_fd(unsigned long nbr, int fd)
+size_t	ft_lputoctal_fd(size_t nbr, int fd)
 {
 	size_t	written_bytes;
 	char	converter;

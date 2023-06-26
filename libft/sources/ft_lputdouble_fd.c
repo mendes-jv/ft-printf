@@ -26,7 +26,7 @@ size_t	ft_lputdouble_fd(double nbr, int fd)
 	written_bytes += ft_lputnbr_fd((int)nbr, fd);
 	nbr -= (int)nbr;
 	written_bytes += write(fd, ".", sizeof(char));
-	while (((int)(nbr * 10)) / 10 > 0)
+	while (((int)(nbr * 10)) / 1 > 0)
 	{
 		nbr *= 10.0;
 		converter = ((int)nbr) % 10 + '0';

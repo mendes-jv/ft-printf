@@ -81,15 +81,19 @@ char	*ft_get_next_line(int fd);
 
 //Prinft
 # ifndef NULL_STRING
-#  define NULL_STRING "(NULL)"
+#  define NULL_STRING "(null)"
 # endif
 
-size_t	ft_lputaddress_fd(unsigned long nbr, int fd);
-size_t	ft_lputbin_fd(unsigned long nbr, int fd);
+# ifndef NULL_POINTER
+#  define NULL_POINTER "(nil)"
+# endif
+
+size_t	ft_lputaddress_fd(size_t nbr, int fd);
+size_t	ft_lputbin_fd(size_t nbr, int fd);
 size_t	ft_lputdouble_fd(double nbr, int fd);
-size_t	ft_lputhexa_fd(unsigned long nbr, int fd, char specifier);
+size_t	ft_lputhexa_fd(unsigned long long nbr, int fd, char specifier);
 size_t	ft_lputnbr_fd(long nbr, int fd);
-size_t	ft_lputoctal_fd(unsigned long nbr, int fd);
+size_t	ft_lputoctal_fd(size_t nbr, int fd);
 size_t	ft_lputstr_fd(char *s, int fd);
 
 #endif
