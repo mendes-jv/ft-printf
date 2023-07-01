@@ -14,6 +14,7 @@
 
 static size_t	ft_apply_specifier(char specifier, va_list ap);
 static size_t	ft_write_specifiers(char specifier, va_list ap);
+static void	ft_check_flags(char *flags, va_list ap);
 
 int	ft_printf(const char *format, ...)
 {
@@ -27,13 +28,41 @@ int	ft_printf(const char *format, ...)
 	while (*format)
 	{
 		if (*format == '%')
+		{
+			ft_check_flags(format);
 			pb += ft_apply_specifier(*(++format), ap);
+		}
 		else
 			pb += write(STDOUT_FD, &(*format), sizeof(char));
 		format++;
 	}
 	va_end(ap);
 	return (pb);
+}
+
+static void	ft_check_flags(char *flags)
+{
+	if (flags == '-')
+		bla;
+	else if (flags == '+')
+		bla;
+	else if (flags == ' ')
+		bla;
+	else if (flags == '0')
+		bla;
+	else if (flags == '#')
+		bla;
+	else
+		ft_check_output_width_and_precision(++flags);
+	return ();
+}
+
+static void ft_check_output_width_and_precision(char *string, char)
+{
+	while (!ft_strchr("0123456789", *string))
+		store_number;
+
+	return ();
 }
 
 static size_t	ft_apply_specifier(char specifier, va_list ap)
