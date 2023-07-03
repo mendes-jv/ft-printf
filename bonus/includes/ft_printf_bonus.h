@@ -26,7 +26,33 @@
 #  define STDOUT_FD 1
 # endif
 
-// Mandatory
+# ifndef SPECIFIERS
+#  define SPECIFIERS "cspdiuxXobf%"
+# endif
+
 int	ft_printf(const char *format, ...);
+
+typedef enum e_bool
+{
+	false = 0,
+	true = 1
+} t_bool;
+
+typedef struct s_flags
+{
+	t_bool	hasMinus;
+	t_bool	hasPlus;
+	t_bool	hasSpace;
+	t_bool	hasZero;
+	t_bool	hasHashtag;
+} t_flags;
+
+typedef struct s_parameters
+{
+	t_flags	*flags;
+	size_t	width;
+	size_t	precision;
+	char	specifer;
+} t_parameters;
 
 #endif

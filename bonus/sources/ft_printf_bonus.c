@@ -12,14 +12,15 @@
 
 #include "../includes/ft_printf_bonus.h"
 
-static size_t	ft_apply_specifier(char specifier, va_list ap);
-static size_t	ft_write_specifiers(char specifier, va_list ap);
-static void	ft_check_flags(char *flags, va_list ap);
+static size_t	ft_apply_specifier(char, va_list);
+static size_t	ft_write_specifiers(char, va_list);
+static void	ft_check_flags(char *, t_flags*);
 
 int	ft_printf(const char *format, ...)
 {
-	va_list	ap;
-	size_t	pb;
+	va_list			ap;
+	size_t			pb;
+	t_parameters	*parameters;
 
 	pb = 0;
 	if (!format)
@@ -29,7 +30,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			ft_check_flags(format);
+			ft_check_flags((char *)++format, parameters->flags);
 			pb += ft_apply_specifier(*(++format), ap);
 		}
 		else
@@ -40,18 +41,18 @@ int	ft_printf(const char *format, ...)
 	return (pb);
 }
 
-static void	ft_check_flags(char *flags)
+static void	ft_check_flags(char *format, t_flags *flags)
 {
-	if (flags == '-')
-		bla;
-	else if (flags == '+')
-		bla;
-	else if (flags == ' ')
-		bla;
-	else if (flags == '0')
-		bla;
-	else if (flags == '#')
-		bla;
+	if (format == '-')
+		flags->hasMinus = true;
+	else if (format == '+')
+		ft_;
+	else if (format == ' ')
+		ft_;
+	else if (format == '0')
+		ft_;
+	else if (format == '#')
+		ft_;
 	else
 		ft_check_output_width_and_precision(++flags);
 	return ();
