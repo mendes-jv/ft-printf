@@ -35,8 +35,8 @@ int	ft_printf(const char *format, ...)
 			ft_check_flags((char *)++format, params->flags);
 			ft_check_mods((char *)++format, params->width, params->precision);
 			params->converted = ft_apply_specifier(*(++format), ap);
-			free(params->converted);
 			pb += ft_write_params(params);
+			free(params->converted);
 		}
 		else
 			pb += write(STDOUT_FD, &(*format), sizeof(char));
