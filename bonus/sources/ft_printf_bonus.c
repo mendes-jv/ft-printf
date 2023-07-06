@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/26 12:31:07 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/06/26 12:31:32 by jovicto2         ###   ########.fr       */
+/*   Created: 2023/07/06 13:44:29 by jovicto2          #+#    #+#             */
+/*   Updated: 2023/07/06 13:44:36 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ft_check_flags(char *format, t_flags *flags)
 static void	ft_check_mods(char *format, size_t *width, size_t *precision)
 {
 	while (!ft_strchr("0123456789", *format))
-		;//TODO
+		; // TODO
 }
 
 static char	*ft_apply_specifier(char specifier, va_list ap)
@@ -76,23 +76,25 @@ static char	*ft_apply_specifier(char specifier, va_list ap)
 
 	str = NULL;
 	if (specifier == 's')
-		str = ft_lputstr_fd(va_arg(ap, char *), STDOUT_FD);
+		str = va_arg(ap, char *); //TODO: verificar free()
 	else if (specifier == 'p')
-		str = ft_lputaddress_fd(va_arg(ap, size_t), STDOUT_FD);
+		str = ft_ptoa(va_arg(ap, size_t));
 	else if (specifier == 'o')
-		str = ft_lputoctal_fd(va_arg(ap, size_t), STDOUT_FD);
+		str = ft_otoa(va_arg(ap, size_t));
 	else if (specifier == 'b')
-		str = ft_lputbin_fd(va_arg(ap, size_t), STDOUT_FD);
+		str = ft_btoa(va_arg(ap, size_t));
 	else if (ft_strchr("di", specifier))
-		str = ft_lputnbr_fd(va_arg(ap, int), STDOUT_FD);
+		str = ft_itoa(va_arg(ap, int));
 	else if (specifier == 'u')
-		str = ft_lputnbr_fd(va_arg(ap, unsigned int), STDOUT_FD);
+		str = ft_itoa(va_arg(ap, unsigned int));
 	else if (ft_strchr("xX", specifier))
-		str = ft_lputhexa_fd(va_arg(ap, unsigned int), STDOUT_FD, specifier);
+		str = ft_htoa(va_arg(ap, unsigned int));
 	else if (specifier == 'f')
-		str = ft_lputdouble_fd(va_arg(ap, double), STDOUT_FD);
-	else
-		str = NULL; //TODO c e %
+		str = ft_dtoa(va_arg(ap, double));
+	else if (specifier == 'c')
+		*str = va_arg(ap, int); //TODO: verificar free()
+	else if (specifier == '%')
+		*str = '%';
 	return (str);
 }
 
