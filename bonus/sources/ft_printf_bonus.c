@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 13:44:29 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/07/06 13:44:36 by jovicto2         ###   ########.fr       */
+/*   Created: 2023/07/06 18:03:04 by jovicto2          #+#    #+#             */
+/*   Updated: 2023/07/06 18:08:25 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ft_check_flags(char *format, t_flags *flags)
 static void	ft_check_mods(char *format, size_t *width, size_t *precision)
 {
 	while (!ft_strchr("0123456789", *format))
-		; // TODO
+		;//TODO
 }
 
 static char	*ft_apply_specifier(char specifier, va_list ap)
@@ -76,25 +76,25 @@ static char	*ft_apply_specifier(char specifier, va_list ap)
 
 	str = NULL;
 	if (specifier == 's')
-		str = va_arg(ap, char *); //TODO: verificar free()
+		str = ft_strdup(va_arg(ap, char *));
 	else if (specifier == 'p')
 		str = ft_ptoa(va_arg(ap, size_t));
 	else if (specifier == 'o')
-		str = ft_otoa(va_arg(ap, size_t));
+		str = ft_itoa_base(va_arg(ap, size_t), 8, OCTALS);
 	else if (specifier == 'b')
-		str = ft_btoa(va_arg(ap, size_t));
+		str = ft_itoa_base(va_arg(ap, size_t), 2, BINARIES);
 	else if (ft_strchr("di", specifier))
-		str = ft_itoa(va_arg(ap, int));
+		str = ft_itoa_base(va_arg(ap, int), 10, DECIMALS);
 	else if (specifier == 'u')
-		str = ft_itoa(va_arg(ap, unsigned int));
-	else if (ft_strchr("xX", specifier))
-		str = ft_htoa(va_arg(ap, unsigned int));
-	else if (specifier == 'f')
-		str = ft_dtoa(va_arg(ap, double));
+		str = ft_itoa_base(va_arg(ap, unsigned int), 10, DECIMALS);
+	else if (specifier == 'X')
+		str = ft_itoa_base(va_arg(ap, unsigned int), 16, UPPER_HEXAS);
+	else if (specifier == 'x')
+		str = ft_itoa_base(va_arg(ap, unsigned int), 16, LOWER_HEXAS);
 	else if (specifier == 'c')
-		*str = va_arg(ap, int); //TODO: verificar free()
+		str = ft_strdup(va_arg(ap, char *)); //verificar
 	else if (specifier == '%')
-		*str = '%';
+		str = ft_strdup(&specifier);
 	return (str);
 }
 
