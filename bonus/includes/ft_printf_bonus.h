@@ -73,7 +73,9 @@ typedef struct s_parameters
 {
 	t_flags	*flags;
 	size_t	*width;
+	size_t	*precision;
 	char	*converted;
+	char	specifier;
 }			t_parameters;
 
 int			ft_printf(const char *format, ...);
