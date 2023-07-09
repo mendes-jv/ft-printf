@@ -18,7 +18,12 @@ void	ft_init_params(t_parameters *params)
 {
 	ft_init_flags(params->flags);
 	*(params->width) = 0;
-	*(params->precision) = 0;
+}
+
+void	ft_free_params(t_parameters *params)
+{
+	free(params->converted);
+	free(params);
 }
 
 static void	ft_init_flags(t_flags *flags)

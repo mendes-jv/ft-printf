@@ -126,29 +126,6 @@ char				*ft_get_next_line(int fd);
 #  define BINARIES "01"
 # endif
 
-typedef enum e_bool
-{
-	false,
-	true
-}					t_bool;
-
-typedef struct s_flags
-{
-	t_bool			has_minus;
-	t_bool			has_plus;
-	t_bool			has_space;
-	t_bool			has_zero;
-	t_bool			has_hashtag;
-}					t_flags;
-
-typedef struct s_parameters
-{
-	t_flags			*flags;
-	size_t			*width;
-	size_t			*precision;
-	char			*converted;
-}					t_parameters;
-
 size_t				ft_lputaddress_fd(size_t nbr, int fd);
 size_t				ft_lputbin_fd(size_t nbr, int fd);
 size_t				ft_lputdouble_fd(double nbr, int fd);

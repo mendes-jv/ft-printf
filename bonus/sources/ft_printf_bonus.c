@@ -13,7 +13,7 @@
 #include "../includes/ft_printf_bonus.h"
 
 static void		ft_check_flags(char *format, t_flags *flags);
-static void		ft_check_mods(char *format, size_t *width, size_t *precision);
+static void		ft_check_width(char *format, size_t *width);
 static char		*ft_apply_specifier(char specifier, va_list ap);
 static size_t	ft_write_params(t_parameters *params);
 
@@ -24,6 +24,7 @@ int	ft_printf(const char *format, ...)
 	t_parameters	*params;
 
 	pb = 0;
+	params = (t_parameters *)ft_calloc(1, sizeof(t_parameters));
 	if (!format)
 		return (PRINTF_ERROR);
 	va_start(ap, format);
@@ -33,10 +34,9 @@ int	ft_printf(const char *format, ...)
 		{
 			ft_init_params(params);
 			ft_check_flags((char *)++format, params->flags);
-			ft_check_mods((char *)++format, params->width, params->precision);
+			ft_check_width((char *)++format, params->width);
 			params->converted = ft_apply_specifier(*(++format), ap);
 			pb += ft_write_params(params);
-			free(params->converted);
 		}
 		else
 			pb += write(STDOUT_FD, &(*format), sizeof(char));
@@ -64,10 +64,21 @@ static void	ft_check_flags(char *format, t_flags *flags)
 	}
 }
 
-static void	ft_check_mods(char *format, size_t *width, size_t *precision)
+static void	ft_check_width(char *format, size_t *width)
 {
-	while (!ft_strchr("0123456789", *format))
-		;//TODO
+	size_t	index;
+	char	*temp;
+
+	index = 0;
+	temp = NULL;
+	while (ft_strchr("0123456789", format[index]))
+		index++;
+	if (!index)
+		return ;
+	temp = ft_substr(format, 0, index);
+	*width = ft_atoi(temp);
+	format += index;
+	free(temp);
 }
 
 static char	*ft_apply_specifier(char specifier, va_list ap)
@@ -92,7 +103,7 @@ static char	*ft_apply_specifier(char specifier, va_list ap)
 	else if (specifier == 'x')
 		str = ft_itoa_base(va_arg(ap, unsigned int), 16, LOWER_HEXAS);
 	else if (specifier == 'c')
-		str = ft_strdup(va_arg(ap, char *)); //verificar
+		str = ft_strdup(va_arg(ap, char *)); // verificar
 	else if (specifier == '%')
 		str = ft_strdup(&specifier);
 	return (str);
@@ -101,7 +112,20 @@ static char	*ft_apply_specifier(char specifier, va_list ap)
 static size_t	ft_write_params(t_parameters *params)
 {
 	size_t	pb;
+	size_t	index;
 
 	pb = 0;
+	index = 0;
+	if (params->flags->has_minus)
+	{
+		params->flags->has_zero = false;
+		pb += ft_lputstr_fd(params->converted, STDOUT_FD);
+	}
+	// TODO: nao aplicar em string;
+	if (params->flags->has_zero)
+		while (index++ <= (*(params->width) - ft_strlen(params->converted)))
+			pb += write(STDOUT_FD, "0", sizeof(char));
+	// TODO: implementar resto da logica
+	ft_free_params(params);
 	return (pb);
 }

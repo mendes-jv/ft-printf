@@ -73,11 +73,11 @@ typedef struct s_parameters
 {
 	t_flags	*flags;
 	size_t	*width;
-	size_t	*precision;
 	char	*converted;
 }			t_parameters;
 
 int			ft_printf(const char *format, ...);
 void		ft_init_params(t_parameters *params);
+void		ft_free_params(t_parameters *params);
 
 #endif
