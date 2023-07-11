@@ -38,7 +38,7 @@ all: $(NAME)
 
 $(PATH_MANDATORY_OBJ)%.o: $(PATH_MANDATORY_SRC)%.c
 	mkdir -p $(PATH_MANDATORY_OBJ)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(MANDATORY_HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(MANDATORY_HEADER)
 
 $(NAME): $(LIBFT) $(MANDATORY_OBJS)
 	cp $(LIBFT) $(NAME)
@@ -53,7 +53,7 @@ bonus: $(LIBFT) $(BONUS_OBJS)
 
 $(PATH_BONUS_OBJ)%.o: $(PATH_BONUS_SRC)%.c
 	mkdir -p $(PATH_BONUS_OBJ)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(BONUS_HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(BONUS_HEADER)
 
 clean:
 	rm -rf $(PATH_MANDATORY_OBJ) $(PATH_BONUS_OBJ)

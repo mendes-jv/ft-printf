@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mandatory/includes/ft_printf.h"
+#include "bonus/includes/ft_printf_bonus.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -20,9 +20,9 @@ int	main(void)
 	int	stdio;
 
 	ft_printf("ft_printf: ");
-	ft = ft_printf("%p", LONG_MAX);
+	ft = ft_printf("%-1c", '0');
 	printf("\nprintf: ");
-	stdio = printf("%p", LONG_MAX);
+	stdio = printf("%-1c", '0');
 	printf("\n");
 	if (ft == stdio)
 		printf("\nSame return values.");

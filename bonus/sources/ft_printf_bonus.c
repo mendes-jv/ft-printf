@@ -12,9 +12,6 @@
 
 #include "../includes/ft_printf_bonus.h"
 
-static void		ft_check_flags(char *format, t_flags *flags);
-static void		ft_check_mods(char *format, size_t *width, size_t *precision);
-static char		*ft_apply_specifier(char specifier, va_list ap);
 static size_t	ft_write_params(t_parameters *params);
 
 int	ft_printf(const char *format, ...)
@@ -32,11 +29,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			ft_init_params(params);
-			ft_check_flags((char *)++format, params->flags);
-			ft_check_mods((char *)++format, params->width, params->precision);
-			params->specifier = *(++format);
-			params->converted = ft_apply_specifier(params->specifier, ap);
+			ft_apply_params(params, (char *)format, ap);
 			pb += ft_write_params(params);
 		}
 		else
@@ -47,7 +40,7 @@ int	ft_printf(const char *format, ...)
 	return (pb);
 }
 
-static void	ft_check_flags(char *format, t_flags *flags)
+char	*ft_check_flags(char *format, t_flags *flags)
 {
 	while (ft_strchr(FLAGS, *format))
 	{
@@ -63,9 +56,10 @@ static void	ft_check_flags(char *format, t_flags *flags)
 			flags->has_hashtag = true;
 		format++;
 	}
+	return (format);
 }
 
-static void	ft_check_mods(char *format, size_t *width, size_t *precision)
+char	*ft_check_mods(char *format, size_t *width, size_t *precision)
 {
 	size_t	index;
 	char	*temp;
@@ -78,19 +72,20 @@ static void	ft_check_mods(char *format, size_t *width, size_t *precision)
 		index++;
 	temp = ft_substr(format, 0, index);
 	if (!index)
-		return ;
+		return (format);
 	if (*(format - 1) == '.')
 		*precision = ft_atoi(temp);
 	else
 	{
 		*width = ft_atoi(temp);
-		ft_check_mods(format, width, precision);
+		ft_check_mods(++format, width, precision);
 	}
-	format += index;
 	free(temp);
+	format += index;
+	return (format);
 }
 
-static char	*ft_apply_specifier(char specifier, va_list ap)
+char	*ft_apply_specifier(char specifier, va_list ap)
 {
 	char	*str;
 
@@ -112,7 +107,7 @@ static char	*ft_apply_specifier(char specifier, va_list ap)
 	else if (specifier == 'x')
 		str = ft_itoa_base(va_arg(ap, unsigned int), 16, LOWER_HEXAS);
 	else if (specifier == 'c')
-		str = ft_strdup(va_arg(ap, char *)); // verificar
+		str = ft_ctoa(va_arg(ap, int));
 	else if (specifier == '%')
 		str = ft_strdup(&specifier);
 	return (str);

@@ -136,5 +136,6 @@ size_t				ft_lputstr_fd(char *s, int fd);
 char				*ft_itoa_base(long long nbr, int base_len,
 						const char *base);
 char				*ft_ptoa(size_t nbr);
+char				*ft_ctoa(char c);
 
 #endif
