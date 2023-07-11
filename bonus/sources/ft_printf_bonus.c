@@ -29,7 +29,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
-			ft_apply_params(params, (char *)format, ap);
+			format = ft_apply_params(params, (char *)format, ap);
 			pb += ft_write_params(params);
 		}
 		else
