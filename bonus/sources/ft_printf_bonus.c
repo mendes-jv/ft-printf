@@ -70,18 +70,20 @@ char	*ft_check_mods(char *format, size_t *width, size_t *precision)
 		format++;
 	while (ft_strchr("0123456789", format[index]))
 		index++;
-	temp = ft_substr(format, 0, index);
 	if (!index)
 		return (format);
+	temp = ft_substr(format, 0, index);
 	if (*(format - 1) == '.')
+	{
 		*precision = ft_atoi(temp);
+		format += index;
+	}
 	else
 	{
 		*width = ft_atoi(temp);
-		ft_check_mods(++format, width, precision);
+		format = ft_check_mods(format + 1, width, precision);
 	}
 	free(temp);
-	format += index;
 	return (format);
 }
 

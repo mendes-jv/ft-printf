@@ -37,8 +37,8 @@ char	*ft_apply_params(t_parameters *params, char *format, va_list ap)
 {
 	ft_init_params(params);
 	format = ft_check_flags((char *)++format, params->flags);
-	format = ft_check_mods((char *)++format, params->width, params->precision);
-	params->specifier = *(++format);
+	format = ft_check_mods((char *)format, params->width, params->precision);
+	params->specifier = *format;
 	params->converted = ft_apply_specifier(params->specifier, ap);
 	return ((char *)format);
 }
