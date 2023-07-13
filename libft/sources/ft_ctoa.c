@@ -15,8 +15,13 @@
 char	*ft_ctoa(char c)
 {
 	char *string;
-
-	string = ft_calloc(2, sizeof(char));
-	*string = c;
+	
+	if (c)
+	{
+		string = ft_calloc(2, sizeof(char));
+		*string = c;
+	}
+	else
+		string = ft_calloc(1, sizeof(char));
 	return (string);
 }

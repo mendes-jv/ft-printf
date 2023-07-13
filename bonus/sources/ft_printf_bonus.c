@@ -126,7 +126,13 @@ static size_t	ft_write_params(t_parameters *params)
 	index = 0;
 	if (params->flags->has_hashtag)
 		index += 2;
-	conv_len = ft_strlen(params->converted); 
+	if(*(params->converted))
+		conv_len = ft_strlen(params->converted); 
+	else
+	{
+		pb+= sizeof(char);
+		conv_len = sizeof(char);
+	}
 	if (params->flags->has_minus)
 	{
 		if (params->flags->has_plus)
