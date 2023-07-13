@@ -20,9 +20,9 @@ int	main(void)
 	int	stdio;
 
 	ft_printf("ft_printf: ");
-	ft = ft_printf("%-1c", '0');
+	ft = ft_printf(" %-1c X", 0);
 	printf("\nprintf: ");
-	stdio = printf("%-1c", '0');
+	stdio = printf(" %-1c X", 0);
 	printf("\n");
 	if (ft == stdio)
 		printf("\nSame return values.");

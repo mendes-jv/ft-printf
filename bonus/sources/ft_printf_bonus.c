@@ -21,7 +21,7 @@ int	ft_printf(const char *format, ...)
 	t_parameters	*params;
 
 	pb = 0;
-	params = (t_parameters *)ft_calloc(1, sizeof(t_parameters));
+	params = NULL;
 	if (!format)
 		return (PRINTF_ERROR);
 	va_start(ap, format);
@@ -29,6 +29,7 @@ int	ft_printf(const char *format, ...)
 	{
 		if (*format == '%')
 		{
+			params = (t_parameters *)ft_calloc(1, sizeof(t_parameters));
 			format = ft_apply_params(params, (char *)format, ap);
 			pb += ft_write_params(params);
 		}
@@ -158,13 +159,13 @@ static size_t	ft_write_params(t_parameters *params)
 				pb += write(STDOUT_FD, "0", sizeof(char));
 		}
 		if (*(params->width))
-			while (index++ <= *(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
+			while (index++ < *(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
 				pb += write(STDOUT_FD, " ", sizeof(char));
 	}
 	else
 	{
 		if (*(params->width))
-			while (index++ <= *(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
+			while (index++ < *(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
 				pb += write(STDOUT_FD, " ", sizeof(char));
 		if (*(params->precision))
 		{

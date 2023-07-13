@@ -18,8 +18,8 @@ static void	ft_init_mods(size_t *width, size_t *precision);
 void	ft_init_params(t_parameters *params)
 {
 	params->flags = (t_flags *)ft_calloc(1, sizeof(t_flags));
-	params->width = (size_t *)ft_calloc(1, sizeof(size_t *));
-	params->precision = (size_t *)ft_calloc(1, sizeof(size_t *));
+	params->width = (size_t *)ft_calloc(1, sizeof(size_t));
+	params->precision = (size_t *)ft_calloc(1, sizeof(size_t));
 	ft_init_flags(params->flags);
 	ft_init_mods(params->width, params->precision);
 }
