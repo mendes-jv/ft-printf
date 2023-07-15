@@ -13,6 +13,7 @@
 #include "../includes/libft.h"
 
 static size_t	ft_ilen(long long nbr, size_t base_len, const char *base);
+static int		ft_is_hexa(size_t base_len, const char *base);
 
 char	*ft_itoa_base(long long nbr, size_t base_len, const char *base)
 {
@@ -28,7 +29,7 @@ char	*ft_itoa_base(long long nbr, size_t base_len, const char *base)
 	if (nbr <= 0)
 	{
 		nbr = -nbr;
-		if (ft_strncmp(base, UPPER_HEXAS, base_len) || ft_strncmp(base, LOWER_HEXAS, base_len))
+		if (!ft_is_hexa(base_len, base))
 		{
 			*string = '-';
 			checker++;
@@ -50,7 +51,7 @@ static size_t	ft_ilen(long long nbr, size_t base_len, const char *base)
 	if (nbr <= 0)
 	{
 		nbr = -nbr;
-		if (base == &UPPER_HEXAS || base == &LOWER_HEXAS)
+		if (!ft_is_hexa(base_len, base))
 			counter++;
 	}
 	while (nbr)
@@ -59,4 +60,10 @@ static size_t	ft_ilen(long long nbr, size_t base_len, const char *base)
 		counter++;
 	}
 	return (counter);
+}
+
+static int	ft_is_hexa(size_t base_len, const char *base)
+{
+	return (ft_strncmp(base, UPPER_HEXAS, base_len) || ft_strncmp(base,
+			LOWER_HEXAS, base_len));
 }

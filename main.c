@@ -20,9 +20,9 @@ int	main(void)
 	int	stdio;
 
 	ft_printf("ft_printf: ");
-	ft = ft_printf(" %-9p %-10p ", LONG_MIN, LONG_MAX);
+	ft = ft_printf(" %-11p %-12p ", INT_MIN, INT_MAX);
 	printf("X\n   printf: ");
-	stdio = printf(" %-9p %-10p ", LONG_MIN, LONG_MAX);
+	stdio = printf(" %-11p %-12p ", INT_MIN, INT_MAX);
 	if (ft == stdio)
 		printf("X\nSame return values.");
 	else
