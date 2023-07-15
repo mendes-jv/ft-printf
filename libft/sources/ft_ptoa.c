@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-char	*ft_ptoa(size_t nbr)
+char	*ft_ptoa (size_t nbr)
 {
 	char	*string;
 	char	*temp;

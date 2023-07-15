@@ -126,13 +126,10 @@ static size_t	ft_write_params(t_parameters *params)
 	index = 0;
 	if (params->flags->has_hashtag)
 		index += 2;
-	if(*(params->converted))
-		conv_len = ft_strlen(params->converted); 
-	else
-	{
-		pb+= sizeof(char);
+	if(params->specifier == 'c' && !*(params->converted))
 		conv_len = sizeof(char);
-	}
+	else
+		conv_len = ft_strlen(params->converted); 
 	if (params->flags->has_minus)
 	{
 		if (params->flags->has_plus)
@@ -157,26 +154,29 @@ static size_t	ft_write_params(t_parameters *params)
 			if (ft_strrchr("xX", params->specifier))
 				pb += write(STDOUT_FD, &(params->specifier), sizeof(char));
 		}
-		pb += ft_lputstr_fd(params->converted, STDOUT_FD);
+		if (params->specifier == 'c' && !*(params->converted))
+			pb += write(STDOUT_FD, &*(params->converted), sizeof(char));
+		else
+			pb += ft_lputstr_fd(params->converted, STDOUT_FD);
 		if (*(params->precision))
 		{
 			params->flags->has_zero = false;
-			while (index++ <= *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
+			while ((long)index++ <= (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, "0", sizeof(char));
 		}
 		if (*(params->width))
-			while (index++ < *(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
+			while ((long)index++ < (long)(*(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 	}
 	else
 	{
 		if (*(params->width))
-			while (index++ < *(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
+			while ((long)index++ < (long)(*(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 		if (*(params->precision))
 		{
 			params->flags->has_zero = false;
-			while (index++ <= *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space)
+			while ((long)index++ <= (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, "0", sizeof(char));
 		}
 		if (params->flags->has_hashtag && ft_strrchr("xX", params->specifier))
@@ -204,7 +204,10 @@ static size_t	ft_write_params(t_parameters *params)
 			else
 				pb += write(STDOUT_FD, "-", sizeof(char));
 		}
-		pb += ft_lputstr_fd(params->converted, STDOUT_FD);
+		if (params->specifier == 'c' && !*(params->converted))
+			pb += write(STDOUT_FD, &*(params->converted), sizeof(char));
+		else
+			pb += ft_lputstr_fd(params->converted, STDOUT_FD);
 	}
 	ft_free_params(params);
 	return (pb);

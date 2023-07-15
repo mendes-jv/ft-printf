@@ -133,7 +133,7 @@ size_t				ft_lputhexa_fd(size_t nbr, int fd, char specifier);
 size_t				ft_lputnbr_fd(long nbr, int fd);
 size_t				ft_lputoctal_fd(size_t nbr, int fd);
 size_t				ft_lputstr_fd(char *s, int fd);
-char				*ft_itoa_base(long long nbr, int base_len,
+char				*ft_itoa_base(long long nbr, size_t base_len,
 						const char *base);
 char				*ft_ptoa(size_t nbr);
 char				*ft_ctoa(char c);

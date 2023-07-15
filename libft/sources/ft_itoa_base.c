@@ -10,26 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/libft.h"
 
-static size_t	ft_ilen(long long nbr);
+static size_t	ft_ilen(long long nbr, size_t base_len, const char *base);
 
-char	*ft_itoa_base(long long nbr, int base_len, const char *base)
+char	*ft_itoa_base(long long nbr, size_t base_len, const char *base)
 {
-	size_t	length;
 	char	*string;
+	size_t	length;
 	size_t	checker;
 
-	length = ft_ilen(nbr);
+	length = ft_ilen(nbr, base_len, base);
 	string = ft_calloc(length + 1, sizeof(char));
 	checker = 0;
 	if (!string)
 		return (NULL);
-	if (nbr < 0)
+	if (nbr <= 0)
 	{
-		nbr *= -1;
-		*string = '-';
-		checker++;
+		nbr = -nbr;
+		if (ft_strncmp(base, UPPER_HEXAS, base_len) || ft_strncmp(base, LOWER_HEXAS, base_len))
+		{
+			*string = '-';
+			checker++;
+		}
 	}
 	while (length > checker)
 	{
@@ -39,19 +42,20 @@ char	*ft_itoa_base(long long nbr, int base_len, const char *base)
 	return (string);
 }
 
-static size_t	ft_ilen(long long nbr)
+static size_t	ft_ilen(long long nbr, size_t base_len, const char *base)
 {
 	size_t	counter;
 
 	counter = 0;
 	if (nbr <= 0)
 	{
-		nbr *= -1;
-		counter++;
+		nbr = -nbr;
+		if (base == &UPPER_HEXAS || base == &LOWER_HEXAS)
+			counter++;
 	}
 	while (nbr)
 	{
-		nbr /= 10;
+		nbr /= base_len;
 		counter++;
 	}
 	return (counter);

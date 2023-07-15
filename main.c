@@ -20,16 +20,15 @@ int	main(void)
 	int	stdio;
 
 	ft_printf("ft_printf: ");
-	ft = ft_printf(" %-1c %-2c %-3c ", '0', 0, '1');
-	printf("\nprintf: ");
-	stdio = printf(" %-1c %-2c %-3c ", '0', 0, '1');
-	printf("\n");
+	ft = ft_printf(" %-9p %-10p ", LONG_MIN, LONG_MAX);
+	printf("X\n   printf: ");
+	stdio = printf(" %-9p %-10p ", LONG_MIN, LONG_MAX);
 	if (ft == stdio)
-		printf("\nSame return values.");
+		printf("X\nSame return values.");
 	else
 	{
-		printf("\ndifference in return values.\n");
-		printf("returned: %d\nexpected: %d\n", ft, stdio);
+		printf("X\ndifference in return values.\n");
+		printf("returned: %d\noriginal: %d\n", ft, stdio);
 	}
 	return (0);
 }
