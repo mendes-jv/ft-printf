@@ -135,6 +135,8 @@ size_t				ft_lputoctal_fd(size_t nbr, int fd);
 size_t				ft_lputstr_fd(char *s, int fd);
 char				*ft_itoa_base(long long nbr, size_t base_len,
 						const char *base);
+char				*ft_itoa_hex(unsigned long long nbr, size_t base_len,
+						const char *base);
 char				*ft_ptoa(size_t nbr);
 char				*ft_ctoa(char c);
 

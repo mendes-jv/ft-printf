@@ -82,7 +82,7 @@ char	*ft_check_mods(char *format, size_t *width, size_t *precision)
 	else
 	{
 		*width = ft_atoi(temp);
-		format = ft_check_mods(format + 1, width, precision);
+		format = ft_check_mods(format + index, width, precision);
 	}
 	free(temp);
 	return (format);
@@ -124,7 +124,7 @@ static size_t	ft_write_params(t_parameters *params)
 
 	pb = 0;
 	index = 0;
-	if (params->flags->has_hashtag)
+	if (params->flags->has_hashtag && *(params->converted) != '0')
 		index += 2;
 	if(params->specifier == 'c' && !*(params->converted))
 		conv_len = sizeof(char);
@@ -147,7 +147,7 @@ static size_t	ft_write_params(t_parameters *params)
 			else
 				pb += write(STDOUT_FD, "-", sizeof(char));
 		}
-		if (params->flags->has_hashtag && ft_strrchr("xX", params->specifier))
+		if (params->flags->has_hashtag && ft_strrchr("xX", params->specifier) && *(params->converted) != '0')
 		{
 			params->flags->has_zero = false;
 			pb += write(STDOUT_FD, "0", sizeof(char));
@@ -161,7 +161,7 @@ static size_t	ft_write_params(t_parameters *params)
 		if (*(params->precision))
 		{
 			params->flags->has_zero = false;
-			while ((long)index++ <= (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
+			while ((long)index++ < (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, "0", sizeof(char));
 		}
 		if (*(params->width))
@@ -170,25 +170,28 @@ static size_t	ft_write_params(t_parameters *params)
 	}
 	else
 	{
+		if (params->flags->has_zero)
+		{
+			while ((long)index++ < (long)(*(params->width) - conv_len - params->flags->has_plus - params->flags->has_space))
+				pb += write(STDOUT_FD, "0", sizeof(char));
+			*(params->width) = 0;
+		}
 		if (*(params->width))
 			while ((long)index++ < (long)(*(params->width) - *(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 		if (*(params->precision))
 		{
 			params->flags->has_zero = false;
-			while ((long)index++ <= (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
+			while ((long)index++ < (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, "0", sizeof(char));
 		}
-		if (params->flags->has_hashtag && ft_strrchr("xX", params->specifier))
+		if (params->flags->has_hashtag && ft_strrchr("xX", params->specifier) && *(params->converted) != '0')
 		{
 			params->flags->has_zero = false;
 			pb += write(STDOUT_FD, "0", sizeof(char));
 			if (ft_strrchr("xX", params->specifier))
 				pb += write(STDOUT_FD, &(params->specifier), sizeof(char));
 		}
-		if (params->flags->has_zero)
-			while (index++ <= *(params->width) - conv_len - params->flags->has_plus - params->flags->has_space)
-				pb += write(STDOUT_FD, "0", sizeof(char));
 		if (params->flags->has_plus)
 		{
 			params->flags->has_space = false;

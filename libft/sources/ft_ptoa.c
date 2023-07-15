@@ -12,14 +12,15 @@
 
 #include "libft.h"
 
-char	*ft_ptoa (size_t nbr)
+char	*ft_ptoa(size_t nbr)
 {
 	char	*string;
 	char	*temp;
 
-	temp = ft_itoa_base(nbr, 16, LOWER_HEXAS);
+	if (!nbr)
+		return (ft_strdup(NULL_POINTER));
+	temp = ft_itoa_hex(nbr, 16, LOWER_HEXAS);
 	string = ft_strjoin("0x", temp);
 	free(temp);
-
-	return(string);
+	return (string);
 }

@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa_base.c                                     :+:      :+:    :+:   */
+/*   ft_itoa_hex.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/06 12:34:37 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/07/06 12:34:40 by jovicto2         ###   ########.fr       */
+/*   Created: 2023/07/15 16:37:53 by jovicto2          #+#    #+#             */
+/*   Updated: 2023/07/15 16:41:29 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 
-static size_t	ft_ilen(long long nbr, size_t base_len);
+static size_t	ft_ilen(long long nbr, size_t base);
 
-char	*ft_itoa_base(long long nbr, size_t base_len, const char *base)
+char	*ft_itoa_hex(unsigned long long nbr, size_t base_len, const char *base)
 {
 	char	*string;
 	size_t	length;
-	size_t	checker;
 
 	length = ft_ilen(nbr, base_len);
-	string = (char *)ft_calloc(length + 1, sizeof(char));
-	checker = 0;
+	string = ft_calloc(length + 1, sizeof(char));
 	if (!string)
 		return (NULL);
 	if (!nbr)
-	{
-		checker++;
-		*string = '0';
 		return (string);
-	}
-	else if (nbr < 0)
-	{
-		checker++;
-		*string = '-';
-		nbr = -nbr;
-	}
-	while (length > checker)
+	while (length > 0)
 	{
 		string[--length] = base[nbr % base_len];
 		nbr /= base_len;
@@ -50,11 +38,8 @@ static size_t	ft_ilen(long long nbr, size_t base_len)
 	size_t	counter;
 
 	counter = 0;
-	if (nbr <= 0)
-	{
-		nbr = -nbr;
+	if (!nbr)
 		counter++;
-	}
 	while (nbr)
 	{
 		nbr /= base_len;
