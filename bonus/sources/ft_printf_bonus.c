@@ -107,9 +107,9 @@ char	*ft_apply_specifier(char specifier, va_list ap)
 	else if (specifier == 'u')
 		str = ft_itoa_base(va_arg(ap, unsigned int), 10, DECIMALS);
 	else if (specifier == 'X')
-		str = ft_itoa_base(va_arg(ap, unsigned int), 16, UPPER_HEXAS);
+		str = ft_itoa_hex(va_arg(ap, unsigned int), 16, UPPER_HEXAS);
 	else if (specifier == 'x')
-		str = ft_itoa_base(va_arg(ap, unsigned int), 16, LOWER_HEXAS);
+		str = ft_itoa_hex(va_arg(ap, unsigned int), 16, LOWER_HEXAS);
 	else if (specifier == 'c')
 		str = ft_ctoa(va_arg(ap, int));
 	else if (specifier == '%')
@@ -144,7 +144,6 @@ static size_t	ft_write_params(t_parameters *params)
 				pb += write(STDOUT_FD, " ", sizeof(char));
 		if (params->flags->has_hashtag && ft_strchr("xX", params->specifier) && *(params->converted) != '0')
 		{
-			params->flags->has_zero = false;
 			pb += write(STDOUT_FD, "0", sizeof(char));
 			if (ft_strrchr("xX", params->specifier))
 				pb += write(STDOUT_FD, &(params->specifier), sizeof(char));
@@ -159,7 +158,7 @@ static size_t	ft_write_params(t_parameters *params)
 	}
 	else
 	{
-		if (params->flags->has_zero)
+		if (params->flags->has_zero && !*(params->precision))
 		{
 			if (ft_atoi((params->converted)) < 0 && ft_strchr("di", params->specifier))
 				pb += write(STDOUT_FD, "-", sizeof(char));
@@ -167,12 +166,16 @@ static size_t	ft_write_params(t_parameters *params)
 				pb += write(STDOUT_FD, "0", sizeof(char));
 			*(params->width) = 0;
 		}
-		if (*(params->width))
-			while ((long)index++ < (long)(*(params->width) - *(params->precision) - conv_len - params->flags->has_plus))
+		if (*(params->width) && *(params->precision) < *(params->width))
+		{
+			if(conv_len < *(params->precision))
+				*(params->width) = *(params->width) - *(params->precision) + conv_len; 
+			while ((long)index++ < (long)(*(params->width) - conv_len - params->flags->has_plus))
 				pb += write(STDOUT_FD, " ", sizeof(char));
+			index = 0;
+		}
 		if (*(params->precision) && params->specifier != 's')
 		{
-			params->flags->has_zero = false;
 			if (ft_atoi((params->converted)) < 0 && ft_strchr("di", params->specifier))
 			{
 				pb += write(STDOUT_FD, "-", sizeof(char));
@@ -183,7 +186,6 @@ static size_t	ft_write_params(t_parameters *params)
 		}
 		if (params->flags->has_hashtag && ft_strchr("xX", params->specifier) && *(params->converted) != '0')
 		{
-			params->flags->has_zero = false;
 			pb += write(STDOUT_FD, "0", sizeof(char));
 			if (ft_strrchr("xX", params->specifier))
 				pb += write(STDOUT_FD, &(params->specifier), sizeof(char));

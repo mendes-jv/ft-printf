@@ -12,7 +12,7 @@
 
 #include "../includes/libft.h"
 
-static size_t	ft_ilen(long long nbr, size_t base);
+static size_t	ft_ilen(unsigned long long nbr, size_t base);
 
 char	*ft_itoa_hex(unsigned long long nbr, size_t base_len, const char *base)
 {
@@ -24,7 +24,10 @@ char	*ft_itoa_hex(unsigned long long nbr, size_t base_len, const char *base)
 	if (!string)
 		return (NULL);
 	if (!nbr)
+	{
+		*string = '0';
 		return (string);
+	}
 	while (length > 0)
 	{
 		string[--length] = base[nbr % base_len];
@@ -33,7 +36,7 @@ char	*ft_itoa_hex(unsigned long long nbr, size_t base_len, const char *base)
 	return (string);
 }
 
-static size_t	ft_ilen(long long nbr, size_t base_len)
+static size_t	ft_ilen(unsigned long long nbr, size_t base_len)
 {
 	size_t	counter;
 
