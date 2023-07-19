@@ -87,6 +87,7 @@ char		*ft_apply_specifier(char specifier, va_list ap);
 char		*ft_check_flags(char *format, t_flags *flags);
 char		*ft_check_mods(char *format, ssize_t *width, ssize_t *precision);
 char		*ft_apply_params(t_parameters *params, char *format, va_list ap);
+char		*ft_apply_string(char *string);
 void		ft_free_params(t_parameters *params);
 void		ft_init_params(t_parameters *params);
 

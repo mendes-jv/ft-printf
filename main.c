@@ -20,9 +20,9 @@ int	main(void)
 	int	stdio;
 
 	ft_printf("ft_printf: ");
-	ft = ft_printf("%020.10i", -42000);
-	printf("X\n   printf: ");
-	stdio = printf("%020.10i", -42000);
+	ft = ft_printf("%-10.2i", -10);
+	printf("X\n___printf: ");
+	stdio = printf("%-10.i", -10);
 	if (ft == stdio)
 		printf("X\nSame return values.");
 	else
