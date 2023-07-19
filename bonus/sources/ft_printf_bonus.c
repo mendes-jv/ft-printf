@@ -61,7 +61,7 @@ char	*ft_check_flags(char *format, t_flags *flags)
 	return (format);
 }
 
-char	*ft_check_mods(char *format, size_t *width, size_t *precision)
+char	*ft_check_mods(char *format, ssize_t *width, ssize_t *precision)
 {
 	size_t	index;
 	char	*temp;
@@ -69,7 +69,10 @@ char	*ft_check_mods(char *format, size_t *width, size_t *precision)
 	index = 0;
 	temp = NULL;
 	if(format[index] == '.')
+	{
+		*precision = 0;
 		format++;
+	}
 	while (ft_strchr("0123456789", format[index]))
 		index++;
 	if (!index)
@@ -119,9 +122,9 @@ char	*ft_apply_specifier(char specifier, va_list ap)
 
 static size_t	ft_write_params(t_parameters *params)
 {
+	long	index;
 	size_t	pb;
-	size_t	index;
-	size_t	conv_len;
+	ssize_t	conv_len;
 
 	pb = 0;
 	index = 0;
@@ -133,6 +136,7 @@ static size_t	ft_write_params(t_parameters *params)
 		conv_len = ft_strlen(params->converted); 
 	if (params->flags->has_minus)
 	{
+		*(params->precision) = 0;
 		if (params->flags->has_plus)
 		{
 			params->flags->has_space = false;
@@ -153,35 +157,35 @@ static size_t	ft_write_params(t_parameters *params)
 		else
 			pb += ft_lputstr_fd(params->converted, STDOUT_FD);
 		if (*(params->width))
-			while ((long)index++ < (long)(*(params->width) - *(params->precision) - conv_len - params->flags->has_plus))
+			while (index++ < (long)(*(params->width) - *(params->precision) - conv_len - params->flags->has_plus))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 	}
 	else
 	{
-		if (params->flags->has_zero && !*(params->precision))
+		if (params->flags->has_zero && *(params->precision) == NOT_SPECIFIED)
 		{
-			if (ft_atoi((params->converted)) < 0 && ft_strchr("di", params->specifier))
+			if (ft_atoi(params->converted) < 0 && ft_strchr("di", params->specifier))
 				pb += write(STDOUT_FD, "-", sizeof(char));
-			while ((long)index++ < (long)(*(params->width) - conv_len - params->flags->has_plus - params->flags->has_space))
+			while (index++ < (long)(*(params->width) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, "0", sizeof(char));
 			*(params->width) = 0;
 		}
 		if (*(params->width) && *(params->precision) < *(params->width))
 		{
 			if(conv_len < *(params->precision))
-				*(params->width) = *(params->width) - *(params->precision) + conv_len; 
-			while ((long)index++ < (long)(*(params->width) - conv_len - params->flags->has_plus))
+				*(params->width) = *(params->width) - *(params->precision) - (ft_atoi(params->converted) < 0) + conv_len;
+			while (index++ < (long)(*(params->width) - conv_len - params->flags->has_plus))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 			index = 0;
 		}
-		if (*(params->precision) && params->specifier != 's')
+		if (*(params->precision) != NOT_SPECIFIED && params->specifier != 's')
 		{
 			if (ft_atoi((params->converted)) < 0 && ft_strchr("di", params->specifier))
 			{
 				pb += write(STDOUT_FD, "-", sizeof(char));
 				conv_len--;
 			}
-			while ((long)index++ < (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
+			while (index++ < (long)(*(params->precision) - conv_len - params->flags->has_plus - params->flags->has_space))
 				pb += write(STDOUT_FD, "0", sizeof(char));
 		}
 		if (params->flags->has_hashtag && ft_strchr("xX", params->specifier) && *(params->converted) != '0')
@@ -201,9 +205,12 @@ static size_t	ft_write_params(t_parameters *params)
 				pb += write(STDOUT_FD, " ", sizeof(char));
 		if (params->specifier == 'c' && !*(params->converted))
 			pb += write(STDOUT_FD, &*(params->converted), sizeof(char));
-		else if ((params->flags->has_zero || *(params->precision)) && ft_atoi((params->converted)) < 0 && ft_strchr("di", params->specifier))
+		else if ((params->flags->has_zero || *(params->precision) > 0) && ft_atoi((params->converted)) < 0 && ft_strchr("di", params->specifier))
 			pb += ft_lputstr_fd(params->converted + 1, STDOUT_FD);
-		else if (*(params->precision) <= conv_len && params->specifier == 's' && !(params->flags->has_space))
+		else if (!*(params->precision) && *(params->width) > 0 && *(params->converted) == '0')
+			while (conv_len--)
+				pb += write(STDOUT_FD, " ", sizeof(char));
+		else if (*(params->precision) != NOT_SPECIFIED && *(params->precision) <= conv_len && params->specifier == 's' && !(params->flags->has_space))
 				pb += write(STDOUT_FD, params->converted, *(params->precision));
 		else
 			pb += ft_lputstr_fd(params->converted, STDOUT_FD);

@@ -26,6 +26,10 @@
 #  define STDOUT_FD 1
 # endif
 
+# ifndef NOT_SPECIFIED
+#  define NOT_SPECIFIED -1
+# endif
+
 # ifndef FLAGS
 #  define FLAGS "-+ 0#"
 # endif
@@ -72,8 +76,8 @@ typedef struct s_flags
 typedef struct s_parameters
 {
 	t_flags	*flags;
-	size_t	*width;
-	size_t	*precision;
+	ssize_t	*width;
+	ssize_t	*precision;
 	char	*converted;
 	char	specifier;
 }			t_parameters;
@@ -81,7 +85,7 @@ typedef struct s_parameters
 int			ft_printf(const char *format, ...);
 char		*ft_apply_specifier(char specifier, va_list ap);
 char		*ft_check_flags(char *format, t_flags *flags);
-char		*ft_check_mods(char *format, size_t *width, size_t *precision);
+char		*ft_check_mods(char *format, ssize_t *width, ssize_t *precision);
 char		*ft_apply_params(t_parameters *params, char *format, va_list ap);
 void		ft_free_params(t_parameters *params);
 void		ft_init_params(t_parameters *params);

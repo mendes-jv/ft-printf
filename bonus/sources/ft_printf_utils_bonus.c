@@ -13,13 +13,13 @@
 #include "../includes/ft_printf_bonus.h"
 
 static void	ft_init_flags(t_flags *flags);
-static void	ft_init_mods(size_t *width, size_t *precision);
+static void	ft_init_mods(ssize_t *width, ssize_t *precision);
 
 void	ft_init_params(t_parameters *params)
 {
 	params->flags = (t_flags *)ft_calloc(1, sizeof(t_flags));
-	params->width = (size_t *)ft_calloc(1, sizeof(size_t));
-	params->precision = (size_t *)ft_calloc(1, sizeof(size_t));
+	params->width = (ssize_t *)ft_calloc(1, sizeof(ssize_t));
+	params->precision = (ssize_t *)ft_calloc(1, sizeof(ssize_t));
 	ft_init_flags(params->flags);
 	ft_init_mods(params->width, params->precision);
 }
@@ -52,8 +52,8 @@ static void	ft_init_flags(t_flags *flags)
 	flags->has_hashtag = false;
 }
 
-static void	ft_init_mods(size_t *width, size_t *precision)
+static void	ft_init_mods(ssize_t *width, ssize_t *precision)
 {
-	*width = 0;
-	*precision = 0;
+	*width = NOT_SPECIFIED;
+	*precision = NOT_SPECIFIED;
 }
