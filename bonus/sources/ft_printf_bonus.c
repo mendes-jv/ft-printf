@@ -128,6 +128,8 @@ static size_t	ft_write_params(t_parameters *params)
 
 	pb = 0;
 	index = 0;
+	if (params->specifier == '%')
+		return (write(STDOUT_FD, params->converted, sizeof(char)));
 	if (params->flags->has_hashtag && *(params->converted) != '0')
 		index += 2;
 	if(params->specifier == 'c' && !*(params->converted))
@@ -175,19 +177,17 @@ static size_t	ft_write_params(t_parameters *params)
 		else if (*(params->precision) != NOT_SPECIFIED && *(params->precision) < conv_len && params->specifier == 's' && !(params->flags->has_space))
 		{
 			if (ft_strncmp((params->converted), NULL_STRING, conv_len))
+			{
 				pb += write(STDOUT_FD, params->converted, *(params->precision));
+				conv_len = *(params->precision);
+			}
 		}
 		else
 			pb += ft_lputstr_fd(params->converted, STDOUT_FD);
 		if (*(params->width))
 		{
-			if (params->specifier == 's' && *(params->precision) != NOT_SPECIFIED)
-			{
-				if(*(params->width) >= *(params->precision))
-					*(params->width) = *(params->width) - *(params->precision) + conv_len;
-			}
-			else if(conv_len <= *(params->precision))
-				*(params->width) = *(params->width) - *(params->precision) - (ft_atoi(params->converted) < 0 || *(params->converted) == '0') + conv_len;
+			if (conv_len <= *(params->precision) && params->specifier != 's')
+				*(params->width) = *(params->width) - *(params->precision) - (ft_atoi(params->converted) < 0 || *(params->converted) == '0') + conv_len;	
 			while (index++ < (long)(*(params->width) - conv_len - params->flags->has_plus))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 		}
@@ -202,12 +202,10 @@ static size_t	ft_write_params(t_parameters *params)
 				pb += write(STDOUT_FD, "0", sizeof(char));
 			*(params->width) = 0;
 		}
-		if (*(params->width) && *(params->precision) < *(params->width))
+		if (*(params->width))
 		{
-			if (conv_len <= *(params->precision))
+			if (conv_len <= *(params->precision) && params->specifier != 's')
 				*(params->width) = *(params->width) - *(params->precision) - (ft_atoi(params->converted) < 0) + conv_len;
-			if (params->specifier == 's' && *(params->precision) != NOT_SPECIFIED)
-				*(params->width) = *(params->width) - *(params->precision) + conv_len;
 			while (index++ < (long)(*(params->width) - conv_len - params->flags->has_plus))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 			index = 0;
