@@ -206,6 +206,8 @@ static size_t	ft_write_params(t_parameters *params)
 		{
 			if (conv_len <= *(params->precision) && params->specifier != 's')
 				*(params->width) = *(params->width) - *(params->precision) - (ft_atoi(params->converted) < 0) + conv_len;
+			else if (conv_len > *(params->precision) && params->specifier == 's' && *(params->precision) != NOT_SPECIFIED)
+				*(params->width) = *(params->width) - *(params->precision) + conv_len;
 			while (index++ < (long)(*(params->width) - conv_len - params->flags->has_plus))
 				pb += write(STDOUT_FD, " ", sizeof(char));
 			index = 0;
