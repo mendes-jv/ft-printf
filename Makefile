@@ -21,7 +21,7 @@ MANDATORY_OBJS = ${MANDATORY_SRC:$(PATH_MANDATORY_SRC)%.c=$(PATH_MANDATORY_OBJ)%
 BONUS_HEADER = bonus/includes/
 PATH_BONUS_SRC = bonus/sources/
 PATH_BONUS_OBJ = bonus/objects/
-BONUS_SRC = $(addprefix $(PATH_BONUS_SRC), ft_printf_bonus.c)
+BONUS_SRC = $(addprefix $(PATH_BONUS_SRC), ft_printf_bonus.c ft_printf_utils_bonus.c ft_param_utils.c)
 BONUS_OBJS = ${BONUS_SRC:$(PATH_BONUS_SRC)%.c=$(PATH_BONUS_OBJ)%.o}
 
 LIBFT = libft/libft.a
@@ -38,7 +38,7 @@ all: $(NAME)
 
 $(PATH_MANDATORY_OBJ)%.o: $(PATH_MANDATORY_SRC)%.c
 	mkdir -p $(PATH_MANDATORY_OBJ)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(MANDATORY_HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(MANDATORY_HEADER)
 
 $(NAME): $(LIBFT) $(MANDATORY_OBJS)
 	cp $(LIBFT) $(NAME)
@@ -53,7 +53,7 @@ bonus: $(LIBFT) $(BONUS_OBJS)
 
 $(PATH_BONUS_OBJ)%.o: $(PATH_BONUS_SRC)%.c
 	mkdir -p $(PATH_BONUS_OBJ)
-	$(CC) $(FLAGS) -c $< -o $@ -I $(BONUS_HEADER)
+	$(CC) $(CFLAGS) -c $< -o $@ -I $(BONUS_HEADER)
 
 clean:
 	rm -rf $(PATH_MANDATORY_OBJ) $(PATH_BONUS_OBJ)

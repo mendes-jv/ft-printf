@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mandatory/includes/ft_printf.h"
+#include "bonus/includes/ft_printf_bonus.h"
 #include <stdio.h>
 #include <limits.h>
 
@@ -20,16 +20,15 @@ int	main(void)
 	int	stdio;
 
 	ft_printf("ft_printf: ");
-	ft = ft_printf("%p", LONG_MAX);
-	printf("\nprintf: ");
-	stdio = printf("%p", LONG_MAX);
-	printf("\n");
+	ft = ft_printf("%7.5s", "bombastic");
+	printf("X\n___printf: ");
+	stdio = printf("%7.5s", "bombastic");
 	if (ft == stdio)
-		printf("\nSame return values.");
+		printf("X\nSame return values.");
 	else
 	{
-		printf("\ndifference in return values.\n");
-		printf("returned: %d\nexpected: %d\n", ft, stdio);
+		printf("X\ndifference in return values.\n");
+		printf("returned: %d\noriginal: %d\n", ft, stdio);
 	}
 	return (0);
 }
