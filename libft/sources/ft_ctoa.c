@@ -14,8 +14,8 @@
 
 char	*ft_ctoa(char c)
 {
-	char *string;
-	
+	char	*string;
+
 	if (c)
 	{
 		string = ft_calloc(2, sizeof(char));

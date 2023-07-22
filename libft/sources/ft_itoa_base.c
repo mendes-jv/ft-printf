@@ -13,6 +13,7 @@
 #include "../includes/libft.h"
 
 static size_t	ft_ilen(long long nbr, size_t base_len);
+static char		ft_apply_checker(size_t *checker, char c);
 
 char	*ft_itoa_base(long long nbr, size_t base_len, const char *base)
 {
@@ -27,14 +28,12 @@ char	*ft_itoa_base(long long nbr, size_t base_len, const char *base)
 		return (NULL);
 	if (!nbr)
 	{
-		checker++;
-		*string = '0';
+		*string = ft_apply_checker(&checker, '0');
 		return (string);
 	}
 	else if (nbr < 0)
 	{
-		checker++;
-		*string = '-';
+		*string = ft_apply_checker(&checker, '-');
 		nbr = -nbr;
 	}
 	while (length > checker)
@@ -43,6 +42,12 @@ char	*ft_itoa_base(long long nbr, size_t base_len, const char *base)
 		nbr /= base_len;
 	}
 	return (string);
+}
+
+static char	ft_apply_checker(size_t *checker, char c)
+{
+	(*checker)++;
+	return (c);
 }
 
 static size_t	ft_ilen(long long nbr, size_t base_len)
