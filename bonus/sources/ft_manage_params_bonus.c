@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils_bonus.c                            :+:      :+:    :+:   */
+/*   ft_manage_params_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 22:35:18 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/07/03 22:52:02 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:58:56 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,6 @@ void	ft_init_params(t_parameters *params)
 	ft_init_mods(params->width, params->precision);
 }
 
-void	ft_free_params(t_parameters *params)
-{
-	free(params->flags);
-	free(params->width);
-	free(params->precision);
-	free(params->converted);
-	free(params);
-}
-
-char	*ft_apply_params(t_parameters *params, char *format, va_list ap)
-{
-	ft_init_params(params);
-	format = ft_check_flags((char *)++format, params->flags);
-	format = ft_check_mods((char *)format, params->width, params->precision);
-	params->specifier = *format;
-	params->converted = ft_apply_specifier(params->specifier, ap);
-	return ((char *)format);
-}
-
 static void	ft_init_flags(t_flags *flags)
 {
 	flags->has_minus = false;
@@ -56,4 +37,23 @@ static void	ft_init_mods(ssize_t *width, ssize_t *precision)
 {
 	*width = NOT_SPECIFIED;
 	*precision = NOT_SPECIFIED;
+}
+
+char	*ft_apply_params(t_parameters *params, char *format, va_list ap)
+{
+	ft_init_params(params);
+	format = ft_check_flags((char *)++format, params->flags);
+	format = ft_check_mods((char *)format, params->width, params->precision);
+	params->specifier = *format;
+	params->converted = ft_apply_specifier(params->specifier, ap);
+	return ((char *)format);
+}
+
+void	ft_free_params(t_parameters *params)
+{
+	free(params->flags);
+	free(params->width);
+	free(params->precision);
+	free(params->converted);
+	free(params);
 }
