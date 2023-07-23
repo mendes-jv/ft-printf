@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_manage_params_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jovicto2 <jovicto2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 22:35:18 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/07/22 16:58:56 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/07/22 21:50:23 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	ft_init_flags(t_flags *flags)
 
 static void	ft_init_mods(ssize_t *width, ssize_t *precision)
 {
-	*width = NOT_SPECIFIED;
-	*precision = NOT_SPECIFIED;
+	*width = NOT_SPEC;
+	*precision = NOT_SPEC;
 }
 
 char	*ft_apply_params(t_parameters *params, char *format, va_list ap)

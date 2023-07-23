@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jovicto2 <jovicto2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 18:03:04 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/07/22 16:59:04 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/07/22 23:28:45 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf_bonus.h"
+
+static ssize_t	*ft_set_modifier(char c, ssize_t *width, ssize_t *precision);
 
 int	ft_printf(const char *format, ...)
 {
@@ -61,8 +63,9 @@ char	*ft_check_flags(char *format, t_flags *flags)
 
 char	*ft_check_mods(char *format, ssize_t *width, ssize_t *precision)
 {
-	size_t	index;
 	char	*temp;
+	size_t	index;
+	ssize_t	*modifier;
 
 	index = 0;
 	temp = NULL;
@@ -76,25 +79,22 @@ char	*ft_check_mods(char *format, ssize_t *width, ssize_t *precision)
 	if (!index)
 		return (format);
 	temp = ft_substr(format, 0, index);
-	if (*(format - 1) == '.')
-	{
-		*precision = ft_atoi(temp);
+	modifier = ft_set_modifier(*(format - 1), width, precision);
+	*modifier = ft_atoi(temp);
+	if (modifier == precision)
 		format += index;
-	}
 	else
-	{
-		*width = ft_atoi(temp);
 		format = ft_check_mods(format + index, width, precision);
-	}
 	free(temp);
 	return (format);
 }
 
-static char	*ft_check_string(char *string)
+static ssize_t	*ft_set_modifier(char c, ssize_t *width, ssize_t *precision)
 {
-	if (!string)
-		string = NULL_STRING;
-	return (ft_strdup(string));
+	if (c == '.')
+		return (precision);
+	else
+		return (width);
 }
 
 char	*ft_apply_specifier(char specifier, va_list ap)
