@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_param_utils.c                                   :+:      :+:    :+:   */
+/*   ft_check_string.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jovicto2 <jovicto2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 23:09:11 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/07/18 23:10:26 by jovicto2         ###   ########.fr       */
+/*   Created: 2023/07/22 22:55:58 by jovicto2          #+#    #+#             */
+/*   Updated: 2023/07/22 22:56:24 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_printf_bonus.h"
+#include "../includes/libft.h"
 
-char	*ft_apply_string(char *string)
+char	*ft_check_string(char *string)
 {
 	if (!string)
 		string = NULL_STRING;

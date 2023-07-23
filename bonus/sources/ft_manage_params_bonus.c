@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_utils_bonus.c                            :+:      :+:    :+:   */
+/*   ft_manage_params_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jovicto2 <jovicto2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 22:35:18 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/07/03 22:52:02 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/07/22 21:50:23 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,19 @@ void	ft_init_params(t_parameters *params)
 	ft_init_mods(params->width, params->precision);
 }
 
-void	ft_free_params(t_parameters *params)
+static void	ft_init_flags(t_flags *flags)
 {
-	free(params->flags);
-	free(params->width);
-	free(params->precision);
-	free(params->converted);
-	free(params);
+	flags->has_minus = false;
+	flags->has_plus = false;
+	flags->has_space = false;
+	flags->has_zero = false;
+	flags->has_hashtag = false;
+}
+
+static void	ft_init_mods(ssize_t *width, ssize_t *precision)
+{
+	*width = NOT_SPEC;
+	*precision = NOT_SPEC;
 }
 
 char	*ft_apply_params(t_parameters *params, char *format, va_list ap)
@@ -43,17 +49,11 @@ char	*ft_apply_params(t_parameters *params, char *format, va_list ap)
 	return ((char *)format);
 }
 
-static void	ft_init_flags(t_flags *flags)
+void	ft_free_params(t_parameters *params)
 {
-	flags->has_minus = false;
-	flags->has_plus = false;
-	flags->has_space = false;
-	flags->has_zero = false;
-	flags->has_hashtag = false;
-}
-
-static void	ft_init_mods(ssize_t *width, ssize_t *precision)
-{
-	*width = NOT_SPECIFIED;
-	*precision = NOT_SPECIFIED;
+	free(params->flags);
+	free(params->width);
+	free(params->precision);
+	free(params->converted);
+	free(params);
 }
