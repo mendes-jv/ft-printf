@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: jovicto2 <jovicto2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 17:54:09 by jovicto2          #+#    #+#             */
-/*   Updated: 2023/06/24 19:31:22 by jovicto2         ###   ########.fr       */
+/*   Updated: 2023/07/22 22:57:18 by jovicto2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,5 +139,6 @@ char				*ft_itoa_hex(unsigned long long nbr, size_t base_len,
 						const char *base);
 char				*ft_ptoa(size_t nbr);
 char				*ft_ctoa(char c);
+char				*ft_check_string(char *string);
 
 #endif

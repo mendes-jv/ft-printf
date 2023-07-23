@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jovicto2 <jovicto2@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: jovicto2 <jovicto2@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/07 19:06:56 by jovicto2          #+#    #+#              #
-#    Updated: 2023/06/16 20:24:42 by jovicto2         ###   ########.fr        #
+#    Updated: 2023/07/22 23:13:19 by jovicto2         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = $(addprefix $(PATH_SRC), ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii
 		ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_lstnew.c \
 		ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c \
 		ft_lstiter.c ft_lstmap.c ft_get_next_line.c ft_lputstr_fd.c ft_lputaddress_fd.c ft_lputhexa_fd.c ft_lputoctal_fd.c \
-		ft_lputdouble_fd.c ft_lputbin_fd.c ft_lputnbr_fd.c ft_itoa_base.c ft_ptoa.c ft_ctoa.c ft_itoa_hex.c) 
+		ft_lputdouble_fd.c ft_lputbin_fd.c ft_lputnbr_fd.c ft_itoa_base.c ft_ptoa.c ft_ctoa.c ft_itoa_hex.c ft_check_string.c) 
 
 HEADER = includes/
 
