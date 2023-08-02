@@ -182,7 +182,7 @@ Compile the library with:
 ```zsh
 make
 ```
-Or, if you want to compile the bonus version(recommendation):
+Or, if you want to compile the bonus version (recommended):
 ```zsh
 make bonus
 ```
