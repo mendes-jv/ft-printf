@@ -2,7 +2,7 @@
 
 # Ft_Printf: You will recode printf and learn how to use variadic arguments.
 
-[![Norminette and Build](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml/badge.svg)](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml)
+[![Norminette and Build](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml/badge.svg?color=dark-green)](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
 ![License](https://img.shields.io/github/license/mendes-jv/ft-printf?color=green)
 ![Code size in bytes](https://img.shields.io/github/languages/code-size/mendes-jv/ft-printf?color=dark-green)
