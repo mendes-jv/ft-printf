@@ -155,7 +155,9 @@ Ft_Printf is the third project at 42. In short, this project consists of coding 
 
 ## How to execute:
 
-[!WARNING]  This project uses an old [libft](https://github.com/mendes-jv/libft) version as a dependency. The most recent version of [libft](https://github.com/mendes-jv/libft) has ft_printf added in its source code.
+> :warning: **Warning**: This project uses an old [libft](https://github.com/mendes-jv/libft) version as a dependency. The most recent version of [libft](https://github.com/mendes-jv/libft) has ft_printf added in its source code.
+
+<br>
 
 First, clone this repository and `cd` into it:
 
