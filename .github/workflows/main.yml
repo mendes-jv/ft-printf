@@ -18,4 +18,4 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - name: Compile
-          run: make bonus && gcc -Wall -Werror -Wextra main.c libftprintf.a && ./a.out
+          run: make bonus && gcc -Wall -Werror -Wextra main.c bonus/includes/ft_printf_bonus.h libftprintf.a && ./a.out
