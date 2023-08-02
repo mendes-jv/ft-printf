@@ -21,7 +21,7 @@ MANDATORY_OBJS = ${MANDATORY_SRC:$(PATH_MANDATORY_SRC)%.c=$(PATH_MANDATORY_OBJ)%
 BONUS_HEADER = bonus/includes/
 PATH_BONUS_SRC = bonus/sources/
 PATH_BONUS_OBJ = bonus/objects/
-BONUS_SRC = $(addprefix $(PATH_BONUS_SRC), ft_printf_bonus.c ft_manage_params_bonus.c ft_write_params_bonus.c)
+BONUS_SRC = $(addprefix $(PATH_BONUS_SRC), ft_printf_bonus.c ft_manage_params_bonus.c ft_write_params_bonus.c ft_apply_flags_bonus.c)
 BONUS_OBJS = ${BONUS_SRC:$(PATH_BONUS_SRC)%.c=$(PATH_BONUS_OBJ)%.o}
 
 LIBFT = libft/libft.a
