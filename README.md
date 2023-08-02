@@ -1,6 +1,6 @@
 <div align = center>
 
-# Ft_Printf: This project is pretty straight forward. You will recode printf. You will mainly learn how to use variadic arguments.
+# Ft_Printf: You will recode printf and learn how to use variadic arguments.
 
 [![Norminette and Build](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml/badge.svg)](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
