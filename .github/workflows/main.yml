@@ -1,0 +1,21 @@
+name: Norminette and Build
+on: [push, pull_request]
+
+jobs:
+  norminette:
+    name: Norminette
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: alexandregv/norminette-action@v3
+  build:
+      name: Build
+      needs: norminette
+      runs-on: ubuntu-latest
+      defaults:
+        run:
+          working-directory: .
+      steps:
+        - uses: actions/checkout@v2
+        - name: Compile
+          run: make bonus && gcc -Wall -Werror -Wextra main.c libftprintf.a && ./a.out
