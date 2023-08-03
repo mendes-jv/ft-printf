@@ -1,6 +1,6 @@
 <div align = center>
 
-# Ft_Printf: You will recode printf and learn how to use variadic arguments
+# ft_printf: You will recode printf and learn how to use variadic arguments
 
 [![Norminette and Build](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml/badge.svg?color=dark-green)](https://github.com/mendes-jv/ft-printf/actions/workflows/main.yml)
 ![42 São Paulo](https://img.shields.io/badge/42-SP-1E2952)
@@ -29,7 +29,7 @@
 
 ## Description:
 
-Ft_Printf is the third project at 42. In short, this project consists of coding a library that contains a simplified version of the printf function. It's an extremely useful function that can be used in the next school's projects.
+Ft_Printf is the third project at 42. In short, this project consists of coding a library that contains a simplified version of the printf function. It's an extremely useful function that can be used in following school's projects.
 
 ## The project:
 
