@@ -15,6 +15,7 @@
 
 # include "../../libft/includes/libft.h"
 # include <stdarg.h>
+# icnlude <stdbool.h>
 # include <stdlib.h>
 # include <unistd.h>
 
@@ -54,19 +55,13 @@
 #  define BINARIES "01"
 # endif
 
-typedef enum e_bool
-{
-	false,
-	true
-}			t_bool;
-
 typedef struct s_flags
 {
-	t_bool	has_minus;
-	t_bool	has_plus;
-	t_bool	has_space;
-	t_bool	has_zero;
-	t_bool	has_hashtag;
+	bool	has_minus;
+	bool	has_plus;
+	bool	has_space;
+	bool	has_zero;
+	bool	has_hashtag;
 }			t_flags;
 
 typedef struct s_parameters
